@@ -7,11 +7,13 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject settingsPanelPrefab;
     private Canvas _canvas;
 
+    private GameLogic _gameLogic;
+
     // 게임의 종류 (싱글, 듀얼)
     private GameType _gameType;
 
     protected override void OnSceneLoad(Scene scene, LoadSceneMode mode)
-    {
+    {       
         // 새로운 씬에서 Canvas 참조 가져오기기
         _canvas = FindFirstObjectByType<Canvas>();
 
@@ -22,8 +24,9 @@ public class GameManager : Singleton<GameManager>
             {
                 blockController.InitBlocks();
             }
-        }
 
+            _gameLogic = new GameLogic(_gameType, blockController);
+        }
     }
 
     // Settings 패널 열기

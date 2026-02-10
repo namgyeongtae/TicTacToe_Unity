@@ -21,8 +21,16 @@ public class BlockController : MonoBehaviour
         }
     }
 
-    public void PlaceMarker(int blockIndex, MarkerType marker)
+    public void PlaceMarker(int blockIndex, Constants.PlayerType playerType)
     {
-        blocks[blockIndex].SetMarker(marker);
+        switch(playerType)
+        {
+            case Constants.PlayerType.PlayerA:
+                blocks[blockIndex].SetMarker(Block.MarkerType.O);
+                break;
+            case Constants.PlayerType.PlayerB:
+                blocks[blockIndex].SetMarker(Block.MarkerType.X);
+                break;
+        }
     }
 }
