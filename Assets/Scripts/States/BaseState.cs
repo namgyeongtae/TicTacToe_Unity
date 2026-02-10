@@ -7,12 +7,20 @@ public abstract class BaseState
     public abstract void OnExit(GameLogic gameLogic);
     public abstract void HandleNextTurn(GameLogic gameLogic);
 
-    public void ProcessMove(GameLogic gameLogic, int index, Constants.PlayerType playerType)
+    public void ProcessMove(GameLogic gamelogic,int index,Constants.PlayerType playerType)
     {
-        // 특정 위치의 마커 표시
-        if (gameLogic.PlaceMarker(index, playerType))
+        //특정위치에 마커가 표시가 되어 있다면.
+        if(gamelogic.PlaceMarker(index, playerType))
         {
-            HandleNextTurn(gameLogic);
-        }
+            var gameResult = gamelogic.CheckGameResult();
+
+            if(gameResult == GameLogic.GameResult.None)
+                HandleNextTurn(gamelogic);                  //턴전환
+            else
+            {
+                Debug.Log("Game Result: " + gameResult);
+                gamelogic.EndGame(gameResult);
+            }
+        }        
     }
 }

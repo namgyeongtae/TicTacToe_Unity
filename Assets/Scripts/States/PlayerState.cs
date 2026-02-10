@@ -26,6 +26,8 @@ public class PlayerState : BaseState
             // 블록이 클릭되었을 때 처리할 로직
             HandleMove(gameLogic, blockIndex);
         };
+
+        GameManager.Instance.SetGameTurn(_playerType);
     }
 
     public override void OnExit(GameLogic gameLogic)
